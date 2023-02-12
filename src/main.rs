@@ -12,7 +12,8 @@ async fn main() {
         .route("/46elks/sms", get(elks_sms))
         .route("/46elks/call", get(elks_call));
     
-    let addr = "[::]:8080".parse().unwrap();
+    //let addr = "[::]:8080".parse().unwrap();
+    let addr = "0.0.0.0:8080".parse().unwrap();
     println!("Server listening on port {}", addr);
     axum::Server::bind(&addr)
     .serve(app.into_make_service())
@@ -38,6 +39,7 @@ async fn elks_sms () -> Json<SmsJson> {
     let message = SmsJson { 
         forward: "+46704132860".to_owned() 
     };
+    println!("sms route tapped");
     Json(message)
     
 }
@@ -46,6 +48,7 @@ async fn elks_call () -> Json<CallJson> {
     let message = CallJson { 
         connect: "+46704132860".to_owned() 
     };
+    println!("call route tapped");
     Json(message)
     
 }
