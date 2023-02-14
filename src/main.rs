@@ -12,8 +12,7 @@ async fn main() {
         .route("/46elks/sms", get(elks_sms))
         .route("/46elks/call", get(elks_call));
     
-    //let addr = "[::]:8080".parse().unwrap();
-    let addr = "0.0.0.0:8080".parse().unwrap();
+    let addr = "[::]:8080".parse().unwrap();
     println!("Server listening on port {}", addr);
     axum::Server::bind(&addr)
     .serve(app.into_make_service())
